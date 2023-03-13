@@ -2,10 +2,15 @@
 Phonebook
 =========
 
-This project can detect inconsistent lists of phone numbers.
+This module can detect inconsistent lists of phone numbers.
 
 Installation
 ============
+We suggest you first create a virtual environment using
+
+    python -m venv venv
+
+Check the `Python documentation <https://docs.python.org/3/library/venv.html>`_ for how to activate this environment on your platform. Then install this module:
 
     python setup.py install
 
