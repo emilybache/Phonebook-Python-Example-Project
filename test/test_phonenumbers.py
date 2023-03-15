@@ -8,7 +8,6 @@ def test_lookup_by_name(phonebook):
     assert "1234" == phonebook.lookup("Bob")
 
 
-#@pytest.mark.skip("WIP")
 def test_phonebook_contains_all_names(phonebook):
     phonebook.add("Bob", "1234")
     assert "Bob" in phonebook.names()
@@ -23,20 +22,17 @@ def test_empty_phonebook_is_consistent(phonebook):
     assert phonebook.is_consistent()
 
 
-def test_is_consistent_with_different_entries(phonebook):
-    phonebook.add("Bob", "12345")
-    phonebook.add("Anna", "012345")
-    assert phonebook.is_consistent()
+@pytest.mark.parametrize("entry1,entry2,is_consistent", [
+    (("Bob", "12345"), ("Anna", "01234"), True),
+    (("Bob", "12345"), ("Sue", "12345"), False),
+    (("Bob", "12345"), ("Sue", "123"), False),
+])
+def test_is_consistent(phonebook, entry1, entry2, is_consistent):
+    phonebook.add(*entry1)
+    phonebook.add(*entry2)
+    assert phonebook.is_consistent() == is_consistent
 
 
-def test_inconsistent_with_duplicate_entries(phonebook):
-    phonebook.add("Bob", "12345")
-    phonebook.add("Sue", "12345")
-    assert not phonebook.is_consistent()
-
-
-def test_inconsistent_with_duplicate_prefix(phonebook):
-    phonebook.add("Bob", "12345")
-    phonebook.add("Sue", "123")
-    assert not phonebook.is_consistent()
-
+@pytest.mark.skip("Work in process on new feature")
+def test_some_new_feature():
+    assert False # test should fail!
